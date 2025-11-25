@@ -58,7 +58,7 @@ pip install -r requirements.txt
 
 3. Set up environment variables:
 ```bash
-cp .env.example .env
+cp env_template.txt .env
 # Edit .env and add your GEMINI_API_KEY
 ```
 
@@ -97,25 +97,47 @@ This project demonstrates the following concepts from the 5-Day AI Agents Intens
 ```
 factflow/
 ├── agents/              # Agent definitions
+│   ├── __init__.py
 │   └── sentiment_agents.py
 ├── tools/               # Custom function tools
+│   ├── __init__.py
 │   ├── market_tools.py
 │   └── api_clients.py
 ├── session/             # Session & memory management
+│   ├── __init__.py
 │   ├── session_manager.py
 │   └── memory_service.py
 ├── observability/       # Logging, tracing, metrics
+│   ├── __init__.py
 │   ├── logging_config.py
 │   ├── tracing.py
 │   └── metrics.py
 ├── evaluation/          # Agent evaluation framework
+│   ├── __init__.py
 │   ├── evaluator.py
 │   └── test_cases.py
 ├── deployment/          # Deployment configurations
+│   ├── __init__.py
 │   └── deploy.py
+├── docs/                # Documentation
+│   ├── SETUP.md
+│   └── USAGE.md
 ├── notebooks/           # Demo notebooks
+│   └── factflow_demo.ipynb
+├── media/               # Project images and diagrams
+│   ├── thumbnail.png
+│   ├── architecture-diagram.png
+│   ├── feature-showcase.png
+│   └── technology-stack.png
+├── logs/                # Generated log files (created at runtime)
+│   ├── factflow.log
+│   ├── metrics.json
+│   └── traces.json
 ├── main.py              # Main entry point
-└── requirements.txt     # Dependencies
+├── Dockerfile           # Docker container configuration
+├── requirements.txt     # Python dependencies
+├── env_template.txt     # Environment variables template
+└── __init__.py          # Package initialization
 ```
 
 ## 🔧 Key Features
@@ -156,7 +178,24 @@ print(response.text)
 
 Run the evaluation framework:
 ```bash
+python -m factflow.evaluation.evaluator
+```
+
+Or from the factflow directory:
+```bash
+cd factflow
 python evaluation/evaluator.py
+```
+
+## 🐳 Docker Deployment
+
+Build and run with Docker:
+```bash
+# Build the image
+docker build -t factflow .
+
+# Run with a query
+docker run --env-file .env factflow "Assess Ethereum right now"
 ```
 
 ## 📝 License
